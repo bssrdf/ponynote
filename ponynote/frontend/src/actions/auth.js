@@ -103,6 +103,10 @@ export const register = (username, password) => {
 export const logout = () => {
     return (dispatch, getState) => {
         let headers = {"Content-Type": "application/json"};
+        let {token} = getState().auth;
+        if (token) {
+            headers["Authorization"] = `Token ${token}`;
+        }
         //return fetch("/api/auth/logout/", {headers, body: "", method: "POST"})
         return fetch(`${api}/auth/logout/`, {headers, body: "", method: "POST"})
             .then(res => {
@@ -118,10 +122,10 @@ export const logout = () => {
                 }
             })
             .then(res => {
-                if (res.status === 204) {
+                if (res.status === 204 || res.status === 401) {
                     dispatch({type: 'LOGOUT_SUCCESSFUL'});
                     return res.data;
-                } else if (res.status === 403 || res.status === 401) {
+                } else if (res.status === 403){
                     dispatch({type: "AUTHENTICATION_ERROR", data: res.data});
                     throw res.data;
                 }

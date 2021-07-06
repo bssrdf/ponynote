@@ -27,6 +27,8 @@ class RegistrationAPI(generics.GenericAPIView):
         user = serializer.save()
         return Response({
             "user": UserSerializer(user, context=self.get_serializer_context()).data,
+            # The Token.objects.create returns a tuple (instance, token). So in order 
+            # to get token use the index 1
             "token": AuthToken.objects.create(user)[1]
         })
 
@@ -40,6 +42,8 @@ class LoginAPI(generics.GenericAPIView):
         user = serializer.validated_data
         return Response({
             "user": UserSerializer(user, context=self.get_serializer_context()).data,
+            # The Token.objects.create returns a tuple (instance, token). So in order 
+            # to get token use the index 1
             "token": AuthToken.objects.create(user)[1]
         })
 

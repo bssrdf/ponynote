@@ -6,14 +6,16 @@ import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 
 import {auth} from "./actions";
-import ponyApp from "./reducers";
+//import ponyApp from "./reducers";
+import rootReducer from "./reducers";
 
 import PonyNote from "./components/PonyNote";
 import NotFound from "./components/NotFound";
 import Register from "./components/Register";
 import Login from "./components/Login";
 
-let store = createStore(ponyApp, applyMiddleware(thunk));
+//let store = createStore(ponyApp, applyMiddleware(thunk));
+let store = createStore(rootReducer, applyMiddleware(thunk));
 
 class RootContainerComponent extends Component {
 
