@@ -1,3 +1,5 @@
+const api = "http://localhost:8000/api";
+
 export const loadUser = () => {
     return (dispatch, getState) => {
         dispatch({type: "USER_LOADING"});
@@ -11,7 +13,8 @@ export const loadUser = () => {
         if (token) {
             headers["Authorization"] = `Token ${token}`;
         }
-        return fetch("/api/auth/user/", {headers, })
+        //return fetch("/api/auth/user/", {headers, })
+        return fetch(`${api}/auth/user/`, {headers, })
             .then(res => {
                 if (res.status < 500) {
                     return res.json().then(data => {
@@ -38,8 +41,8 @@ export const login = (username, password) => {
     return (dispatch, getState) => {
         let headers = {"Content-Type": "application/json"};
         let body = JSON.stringify({username, password});
-
-        return fetch("/api/auth/login/", {headers, body, method: "POST"})
+        //return fetch("/api/auth/login/", {headers, body, method: "POST"})
+        return fetch(`${api}/auth/login/`, {headers, body, method: "POST"})
             .then(res => {
                 if (res.status < 500) {
                     return res.json().then(data => {
@@ -70,7 +73,8 @@ export const register = (username, password) => {
         let headers = {"Content-Type": "application/json"};
         let body = JSON.stringify({username, password});
 
-        return fetch("/api/auth/register/", {headers, body, method: "POST"})
+        //return fetch("/api/auth/register/", {headers, body, method: "POST"})
+        return fetch(`${api}/auth/register/`, {headers, body, method: "POST"})
             .then(res => {
                 if (res.status < 500) {
                     return res.json().then(data => {
@@ -99,8 +103,8 @@ export const register = (username, password) => {
 export const logout = () => {
     return (dispatch, getState) => {
         let headers = {"Content-Type": "application/json"};
-
-        return fetch("/api/auth/logout/", {headers, body: "", method: "POST"})
+        //return fetch("/api/auth/logout/", {headers, body: "", method: "POST"})
+        return fetch(`${api}/auth/logout/`, {headers, body: "", method: "POST"})
             .then(res => {
                 if (res.status === 204) {
                     return {status: res.status, data: {}};

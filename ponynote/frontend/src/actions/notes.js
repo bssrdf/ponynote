@@ -1,3 +1,5 @@
+const api = "http://localhost:8000/api";
+
 export const fetchNotes = () => {
     return (dispatch, getState) => {
         let headers = {"Content-Type": "application/json"};
@@ -6,8 +8,8 @@ export const fetchNotes = () => {
         if (token) {
             headers["Authorization"] = `Token ${token}`;
         }
-
-        return fetch("/api/notes/", {headers, })
+        //return fetch("/api/notes/", {headers, })
+        return fetch(`${api}/notes/`, {headers, })
             .then(res => {
                 if (res.status < 500) {
                     return res.json().then(data => {
@@ -39,7 +41,8 @@ export const addNote = text => {
         }
 
         let body = JSON.stringify({text, });
-        return fetch("/api/notes/", {headers, method: "POST", body})
+        //return fetch("/api/notes/", {headers, method: "POST", body})
+        return fetch(`${api}/notes/`, {headers, method: "POST", body})
             .then(res => {
                 if (res.status < 500) {
                     return res.json().then(data => {
@@ -74,7 +77,8 @@ export const updateNote = (index, text) => {
         let body = JSON.stringify({text, });
         let noteId = getState().notes[index].id;
 
-        return fetch(`/api/notes/${noteId}/`, {headers, method: "PUT", body})
+        //return fetch(`/api/notes/${noteId}/`, {headers, method: "PUT", body})
+        return fetch(`${api}/notes/${noteId}/`, {headers, method: "PUT", body})
             .then(res => {
                 if (res.status < 500) {
                     return res.json().then(data => {
@@ -107,8 +111,8 @@ export const deleteNote = index => {
         }
 
         let noteId = getState().notes[index].id;
-
-        return fetch(`/api/notes/${noteId}/`, {headers, method: "DELETE"})
+        //return fetch(`/api/notes/${noteId}/`, {headers, method: "DELETE"})
+        return fetch(`${api}/notes/${noteId}/`, {headers, method: "DELETE"})
             .then(res => {
                 if (res.status === 204) {
                     return {status: res.status, data: {}};

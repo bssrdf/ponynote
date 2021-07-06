@@ -25,8 +25,10 @@ SECRET_KEY = '=e%s=1kdk1_+yur9cmpkw8r-z5gd(owqpxbyl+6^)*10-a3c4v'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
+CORS_ALLOW_ALL_ORIGINS = True
 
 # Application definition
 
@@ -40,11 +42,12 @@ INSTALLED_APPS = [
     'webpack_loader',
     'rest_framework',
     'knox',
-
+    'corsheaders', 
     'notes.apps.NotesConfig',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
