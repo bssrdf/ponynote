@@ -68,7 +68,7 @@ class PonyNote extends Component {
 
 const mapStateToProps = state => {
     return {
-        notes: state.notes,
+        notes: state.mynotes,
     }
 }
 

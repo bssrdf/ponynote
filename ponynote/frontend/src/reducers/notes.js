@@ -1,9 +1,10 @@
 const initialState = [
-    {text: "Write code!"}
+    {text: "Write code!"},
+    {text: "Read code!"}
 ];
 
 
-export default function notes(state=initialState, action) {
+export default function mynotes(state=initialState, action) {
     let noteList = state.slice();
 
     switch (action.type) {
