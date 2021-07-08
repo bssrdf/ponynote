@@ -2,7 +2,7 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 
-from .models import Note
+from .models import (Note, Folder, File)
 
 
 class NoteSerializer(serializers.ModelSerializer):
@@ -39,3 +39,10 @@ class LoginUserSerializer(serializers.Serializer):
         if user and user.is_active:
             return user
         raise serializers.ValidationError("Unable to log in with provided credentials.")
+
+
+class MakeFolderSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        Model = Folder
+        fields = ('foldername', 'folder_path')
