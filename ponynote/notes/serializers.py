@@ -40,6 +40,12 @@ class LoginUserSerializer(serializers.Serializer):
             return user
         raise serializers.ValidationError("Unable to log in with provided credentials.")
 
+class FileUploadSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = File
+        fields = ('file_name','file','folder_path', 'owner')
+        # extra_kwargs = {'username': {'read_only': True}}
 
 class MakeFolderSerializer(serializers.ModelSerializer):
 
